@@ -1,11 +1,5 @@
 const totalOddNumbers = function (array) {
-  let oddNumbers=0;
-  for ( index =0; index < array.length; index++) {
-    if( array[index] %2 != 0 ) {
-      oddNumbers++;
-    }
-  }
-  return oddNumbers;
+  return array.filter(function(element) { return element % 2;}).length;
 }
 
 exports.totalOddNumbers = totalOddNumbers;
