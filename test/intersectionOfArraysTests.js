@@ -1,4 +1,4 @@
-const intersectionOfArrays = require('./intersectionOfArraysLib.js').intersectionOfArrays;
+const intersectionOfArrays = require('../libs/intersectionOfArraysLib.js').intersectionOfArrays;
 
 const assert = require('assert');
 assert.deepEqual(intersectionOfArrays([1],[2]),[]); 

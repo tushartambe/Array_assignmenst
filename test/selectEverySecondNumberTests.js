@@ -1,4 +1,4 @@
-const numbers = require('./selectEverySecondNumberLib.js');
+const cou = require('../libs/selectEverySecondNumberLib.js');
 const assert = require('assert');
 
 let inputArray = [];

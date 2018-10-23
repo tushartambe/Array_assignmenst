@@ -1,4 +1,4 @@
-const differentElements = require('./differentiateArraysLib.js').differentElements;
+const differentElements = require('../libs/differentiateArraysLib.js').differentElements;
 
 const assert = require('assert');
 

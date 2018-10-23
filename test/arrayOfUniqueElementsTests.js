@@ -1,4 +1,4 @@
-const uniqueElements = require('./arrayOfUniqueElementsLib.js').uniqueElements;
+const uniqueElements = require('../libs/arrayOfUniqueElementsLib.js').uniqueElements;
 
 const assert = require('assert');
 assert.deepEqual(uniqueElements([1]),[1]); 
