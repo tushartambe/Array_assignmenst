@@ -1,21 +1,3 @@
-const whichIsSmaller = function(firstArray,secondArray) {
-  if(firstArray.length < secondArray.length)
-  {
-    return firstArray;
-  } else {
-    return secondArray;
-  }
-}
-
-const whichIsBigger = function(firstArray,secondArray) {
-  if(firstArray.length >= secondArray.length)
-  {
-    return firstArray;
-  } else {
-    return secondArray;
-  }
-}
-
 const createZip = function(firstNumber,secondNumber) {
   let zip = [];
   zip[0] = firstNumber;
@@ -25,12 +7,10 @@ const createZip = function(firstNumber,secondNumber) {
 }
 
 const zipOfArrays = function (firstArray,secondArray) {
-  let smallerArray = whichIsSmaller(firstArray,secondArray);
-  let biggerArray = whichIsBigger(firstArray,secondArray);
-
+  let lengthOfSmallArray = Math.min(firstArray.length,secondArray.length);
   let zip = [];
-  for( let counter = 0; counter < smallerArray.length; counter++) {
-    zip[counter] = createZip(biggerArray[counter],smallerArray[counter]);
+  for( let counter = 0; counter < lengthOfSmallArray; counter++) {
+    zip[counter] = createZip(firstArray[counter],secondArray[counter]);
   }
 
   return zip;

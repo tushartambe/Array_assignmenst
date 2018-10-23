@@ -1,4 +1,4 @@
-const unionOfArrays = require('./unionOfArraysLib.js').unionOfArrays;
+const unionOfArrays = require('../libs/unionOfArraysLib.js').unionOfArrays;
 
 const assert = require('assert');
 assert.deepEqual(unionOfArrays([1],[2]),[1,2]); 

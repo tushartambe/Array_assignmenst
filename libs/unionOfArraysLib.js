@@ -1,26 +1,23 @@
-const pushUniqueNumbers = function(uniqueElementsArray,number) {
-  let isPresent = false;
-  for(let counter= 0; counter < uniqueElementsArray.length; counter++) {
-    if(uniqueElementsArray[counter] == number) {
-      isPresent = true;
-    }
-  }
-  if(isPresent == false) {
-    uniqueElementsArray.push(number);
-  }
-}
+const uniqueElements = require('./arrayOfUniqueElementsLib.js').uniqueElements;
 
 const unionOfArrays = function (firstArray,secondArray) {
-  let uniqueElementsArray = [];
+  firstArray = uniqueElements(firstArray);
+  secondArray = uniqueElements(secondArray);
+  let unionOfNumbers = [];
+
   for(let counter = 0; counter < firstArray.length; counter++) {
-    pushUniqueNumbers(uniqueElementsArray,firstArray[counter]);
+    if(!unionOfNumbers.includes(firstArray[counter])) {
+      unionOfNumbers.push(firstArray[counter]);
+    }
   }
 
   for(let counter = 0; counter < secondArray.length; counter++) {
-    pushUniqueNumbers(uniqueElementsArray,secondArray[counter]);
+    if(!unionOfNumbers.includes(secondArray[counter])) {
+      unionOfNumbers.push(secondArray[counter]);
+    }
   }
 
-  return uniqueElementsArray;
+  return unionOfNumbers;
 }
 
 exports.unionOfArrays = unionOfArrays;
