@@ -1,4 +1,4 @@
-const extractDigits = require('./extractDigitsLib.js').extractDigits;
+const extractDigits = require('../libs/extractDigitsLib.js').extractDigits;
 const assert = require('assert');
 
 assert.deepEqual(extractDigits(2),[2]); 
