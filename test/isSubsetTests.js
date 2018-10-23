@@ -1,4 +1,4 @@
-const isSubset = require('./isSubsetLib.js').isSubset;
+const isSubset = require('../libs/isSubsetLib.js').isSubset;
 
 const assert = require('assert');
 
