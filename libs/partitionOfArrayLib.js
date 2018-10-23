@@ -12,34 +12,22 @@ const sortArray = function(array) {
   return array;
 }
 
-const smallerNumbers = function(array,number) {
-  let matchedNumbers = [];
-
-  for(let counter=0; counter < array.length; counter++) {
-    if(array[counter] <= number) {
-      matchedNumbers.push(array[counter]);
-    }
+const seperateNumbers = function (state,element){
+  let {smallerNumbers,biggerNumbers,number} = state;
+  if( element <= state.number) {
+    smallerNumbers = smallerNumbers.concat(element);
+    return {smallerNumbers :smallerNumbers,biggerNumbers:biggerNumbers,number:number};
   }
-  return matchedNumbers;
-}
 
-const biggerNumbers = function(array,number) {
-    let matchedNumbers = [];
-
-  for(let counter=0; counter < array.length; counter++) {
-    if(array[counter] > number) {
-      matchedNumbers.push(array[counter]);
-    }
-  }
-  return matchedNumbers;
+  biggerNumbers = biggerNumbers.concat(element);
+  return {smallerNumbers :smallerNumbers,biggerNumbers:biggerNumbers,number:number};
 }
 
 const partitionOfArray = function (array,number) {
-  let partitions = [];
   let sortedArray = sortArray(array);
-
-  partitions[0] = smallerNumbers(sortedArray,number);
-  partitions[1] = biggerNumbers(sortedArray,number);
+  let partitions = [];
+  partitions[0] = array.reduce(seperateNumbers,{smallerNumbers:[],biggerNumbers: [],number:number}).smallerNumbers;
+  partitions[1] = array.reduce(seperateNumbers,{smallerNumbers:[],biggerNumbers: [],number:number}).biggerNumbers;
 
   return partitions;
 }

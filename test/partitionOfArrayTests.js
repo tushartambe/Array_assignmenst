@@ -1,4 +1,4 @@
-const partitionOfArray = require('./partitionOfArrayLib.js').partitionOfArray;
+const partitionOfArray = require('../libs/partitionOfArrayLib.js').partitionOfArray;
 
 const assert = require('assert');
 
