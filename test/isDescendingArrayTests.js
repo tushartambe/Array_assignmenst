@@ -1,4 +1,4 @@
-const isDescending = require('./isDescendingArrayLib.js').isDescending;
+const isDescending = require('../libs/isDescendingArrayLib.js').isDescending;
 const assert = require('assert');
 
 assert.equal(isDescending([4]),true);
