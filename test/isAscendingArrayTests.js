@@ -1,7 +1,6 @@
 const isAscending = require('./isAscendingArrayLib.js').isAscending;
 const assert = require('assert');
 
-assert.equal(isAscending([]),""); 
 assert.equal(isAscending([4]),true);
 assert.equal(isAscending([3,5]),true);
 assert.equal(isAscending([4,-2,5]),false);
