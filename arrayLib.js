@@ -14,6 +14,7 @@ exports.uniqueElements = uniqueElements;
 const calculateSum = function (firstNumber,secondNumber) {
   return firstNumber+secondNumber;
 }
+
 const calculateAverage = function (numbersList) {
   return (numbersList.reduce(calculateSum,0))/numbersList.length;
 }
@@ -21,13 +22,13 @@ exports.calculateAverage = calculateAverage;
 //--------------------------------------------------
 
 const totalEvenNumbers = function (numbers) {
-  return numbers.filter(function(element) { return (element % 2 == 0);}).length;
+  return numbers.filter(isEven).length;
 
 }
 exports.totalEvenNumbers = totalEvenNumbers;
 //-----------------------------------------------------
 
-const checkGreaterNumbers = function(state, currentElement){
+const countGreaterNumbers = function(state, currentElement){
   let {count,threshold}=state;
 
   if(currentElement > state.threshold) {
@@ -38,14 +39,14 @@ const checkGreaterNumbers = function(state, currentElement){
 
 const countNumbersAbove = function (numbersList,threshold) {
 
-  let totalNumbers = numbersList.reduce(checkGreaterNumbers, {count : 0, threshold : threshold}).count;
+  let totalNumbers = numbersList.reduce(countGreaterNumbers, {count : 0, threshold : threshold}).count;
   return totalNumbers;
 }
 
 exports.countNumbersAbove = countNumbersAbove;
 //------------------------------------------------
 
-const checkLowerNumbers = function(countObject, currentElement){
+const countLowerNumbers = function(countObject, currentElement){
   let {count,threshold}=countObject;
 
   if(currentElement < countObject.threshold) {
@@ -56,7 +57,7 @@ const checkLowerNumbers = function(countObject, currentElement){
 
 const  countNumbersBelow = function (numbers,threshold) {
 
-  let totalNumbers = numbers.reduce(checkLowerNumbers, {count : 0, threshold : threshold}).count;
+  let totalNumbers = numbers.reduce(countLowerNumbers, {count : 0, threshold : threshold}).count;
   return totalNumbers;
 }
 
@@ -64,7 +65,7 @@ exports.countNumbersBelow = countNumbersBelow;
 //---------------------------------------------------
 
 const totalOddNumbers = function (numbers) {
-  return numbers.filter(function(element) { return element % 2;}).length;
+  return numbers.filter(isOdd).length;
 }
 
 exports.totalOddNumbers = totalOddNumbers;
@@ -109,22 +110,22 @@ const findEvenNumbers = function (numbers) {
 exports.findEvenNumbers = findEvenNumbers;
 //----------------------------------------------
 
-const bigNumber = function (firstNumber,secondNumber) {
+const checkGreaterNumber = function (firstNumber,secondNumber) {
   return Math.max(firstNumber,secondNumber);
 }
 
 const findGreatestNumber = function (numbersList) {
-  return numbersList.reduce(bigNumber);
+  return numbersList.reduce(checkGreaterNumber);
 }
 exports.findGreatest = findGreatestNumber;
 //----------------------------------------------
 
-const smallNumber = function (firstNumber,secondNumber) {
+const checkSmallerNumber = function (firstNumber,secondNumber) {
   return Math.min(firstNumber,secondNumber);
 }
 
 const findLowestNumber = function (numbersList) {
-  return numbersList.reduce(smallNumber);
+  return numbersList.reduce(checkSmallerNumber);
 }
 exports.findLowest = findLowestNumber;
 //-------------------------------------------------
@@ -140,18 +141,14 @@ const findOddNumbers = function (numbers) {
 exports.findOddNumbers = findOddNumbers;
 //----------------------------------------------
 
-const findReverse = function (dataSet) {
+const reversedList = function (dataSet) {
   return dataSet.reverse();
 }
-exports.findReverse= findReverse;
+exports.reversedList= reversedList;
 //----------------------------------------------
 
-const sum = function(previousNumber,currentNumber) {
-  return previousNumber+currentNumber;
-}
-
 const findSum = function (dataSet) {
-  return dataSet.reduce(sum,0);
+  return dataSet.reduce(calculateSum,0);
 }
 exports.findSum = findSum;
 //----------------------------------------------

@@ -134,12 +134,12 @@ assert.deepEqual(findOddNumbers([4,4]),[]);
 assert.deepEqual(findOddNumbers([3,6,2,1,8,7]),[3,1,7]);
 
 //------------------------------------------------------
-const findReverse = require('./arrayLib.js').findReverse;
+const reversedList = require('./arrayLib.js').reversedList;
 
-assert.deepEqual(findReverse([3]),[3]);
-assert.deepEqual(findReverse([4,3]),[3,4]);
-assert.deepEqual(findReverse([3,4,5]),[5,4,3]);
-assert.deepEqual(findReverse([3,6,2,1,8,7]),[7,8,1,2,6,3]);
+assert.deepEqual(reversedList([3]),[3]);
+assert.deepEqual(reversedList([4,3]),[3,4]);
+assert.deepEqual(reversedList([3,4,5]),[5,4,3]);
+assert.deepEqual(reversedList([3,6,2,1,8,7]),[7,8,1,2,6,3]);
 //---------------------------------------------------------
 
 const findSum = require('./arrayLib.js').findSum;
