@@ -1,11 +1,12 @@
-const uniqueElements = function (numbers) {
-  let uniqueElementsArray = [];
-  for(let counter = 0; counter < numbers.length; counter++) {
-    if(!uniqueElementsArray.includes(numbers[counter])) {
-      uniqueElementsArray.push(numbers[counter]);
-    }
+filterUniqueElements = function(uniqueList, element) {
+  if(!uniqueList.includes(element)) {
+    uniqueList = uniqueList.concat(element);
   }
-  return uniqueElementsArray;
+  return uniqueList;
+}
+
+const uniqueElements = function (numbers) {
+  return numbers.reduce(filterUniqueElements,[]);
 }
 
 exports.uniqueElements = uniqueElements;
@@ -21,44 +22,35 @@ const calculateAverage = function (numbersList) {
 exports.calculateAverage = calculateAverage;
 //--------------------------------------------------
 
-const totalEvenNumbers = function (numbers) {
+const countEvens = function (numbers) {
   return numbers.filter(isEven).length;
 
 }
-exports.totalEvenNumbers = totalEvenNumbers;
+exports.countEvens = countEvens;
 //-----------------------------------------------------
-
-const countGreaterNumbers = function(state, currentElement){
-  let {count,threshold}=state;
-
-  if(currentElement > state.threshold) {
-    state.count++
+const filterGreaterNumbers = function(threshold) {
+  return function(element) {
+    return element > threshold;
   }
-  return state;
 }
 
 const countNumbersAbove = function (numbersList,threshold) {
-
-  let totalNumbers = numbersList.reduce(countGreaterNumbers, {count : 0, threshold : threshold}).count;
-  return totalNumbers;
+  greaterNumbers = filterGreaterNumbers(threshold);
+  return numbersList.filter(greaterNumbers).length; 
 }
 
 exports.countNumbersAbove = countNumbersAbove;
 //------------------------------------------------
 
-const countLowerNumbers = function(countObject, currentElement){
-  let {count,threshold}=countObject;
-
-  if(currentElement < countObject.threshold) {
-    countObject.count++
+const filterLowerNumbers = function(threshold) {
+  return function(element) {
+    return element < threshold;
   }
-  return countObject;
 }
 
-const  countNumbersBelow = function (numbers,threshold) {
-
-  let totalNumbers = numbers.reduce(countLowerNumbers, {count : 0, threshold : threshold}).count;
-  return totalNumbers;
+const  countNumbersBelow = function (numbersList,threshold) {
+  lowerNumbers = filterLowerNumbers(threshold);
+  return numbersList.filter(lowerNumbers).length; 
 }
 
 exports.countNumbersBelow = countNumbersBelow;

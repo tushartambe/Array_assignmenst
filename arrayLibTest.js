@@ -22,14 +22,14 @@ assert.equal(calculateAverage([23,40,1,0]),16);
 
 //----------------------------------------------
 
-const totalEvenNumbers = require('./arrayLib.js').totalEvenNumbers;
+const countEvens = require('./arrayLib.js').countEvens;
 
-assert.deepEqual(totalEvenNumbers([]),0); 
-assert.deepEqual(totalEvenNumbers([4]),1);
-assert.deepEqual(totalEvenNumbers([3,5]),0);
-assert.deepEqual(totalEvenNumbers([4,-2,5]),2);
-assert.deepEqual(totalEvenNumbers([2,0]),2);
-assert.deepEqual(totalEvenNumbers([23,405,12,0,75,9,7,2]),3);
+assert.deepEqual(countEvens([]),0); 
+assert.deepEqual(countEvens([4]),1);
+assert.deepEqual(countEvens([3,5]),0);
+assert.deepEqual(countEvens([4,-2,5]),2);
+assert.deepEqual(countEvens([2,0]),2);
+assert.deepEqual(countEvens([23,405,12,0,75,9,7,2]),3);
 //----------------------------------------------
 
 const countNumbersAbove = require('./arrayLib.js').countNumbersAbove;
