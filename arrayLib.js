@@ -1,6 +1,7 @@
-const uniqueElements = function (numbers) {
-  let uniqueElementsArray = [];
-  for(let counter = 0; counter < numbers.length; counter++) {
+// Try implementing this with a higher order function. (e.g. map, filter, reduce, every, some)
+const uniqueElements = function (numbers) { // The function is called uniqueElements, but takes only numbers? Or does it work for some other types too?
+  let uniqueElementsArray = [];  // The name can be shortened - I know its an array from its initialization. 
+  for(let counter = 0; counter < numbers.length; counter++) { // Could you not have used a for of loop?
     if(!uniqueElementsArray.includes(numbers[counter])) {
       uniqueElementsArray.push(numbers[counter]);
     }
@@ -8,26 +9,26 @@ const uniqueElements = function (numbers) {
   return uniqueElementsArray;
 }
 
-exports.uniqueElements = uniqueElements;
+exports.uniqueElements = uniqueElements; // What is your reason of putting export right under te function instead of the end...
 //------------------------------------------
 
 const calculateSum = function (firstNumber,secondNumber) {
   return firstNumber+secondNumber;
 }
 
-const calculateAverage = function (numbersList) {
+const calculateAverage = function (numbersList) { 
   return (numbersList.reduce(calculateSum,0))/numbersList.length;
 }
 exports.calculateAverage = calculateAverage;
 //--------------------------------------------------
 
-const totalEvenNumbers = function (numbers) {
+const totalEvenNumbers = function (numbers) { // name of this function is confusing - is it the sum of even numbers, or total numbers of the even numbers?
   return numbers.filter(isEven).length;
 
 }
 exports.totalEvenNumbers = totalEvenNumbers;
 //-----------------------------------------------------
-
+// This looks like a complicated implementation. Why not use filter to solve this?
 const countGreaterNumbers = function(state, currentElement){
   let {count,threshold}=state;
 
@@ -45,7 +46,7 @@ const countNumbersAbove = function (numbersList,threshold) {
 
 exports.countNumbersAbove = countNumbersAbove;
 //------------------------------------------------
-
+// This looks like a complicated implementation. Why not use filter to solve this?
 const countLowerNumbers = function(countObject, currentElement){
   let {count,threshold}=countObject;
 
@@ -71,11 +72,14 @@ const totalOddNumbers = function (numbers) {
 exports.totalOddNumbers = totalOddNumbers;
 //-----------------------------------------
 
+// Work on feedback (1) first. Make commit. 
+// Work on feedback (2) then. Make commit.
+// 2. Implement this with higher order function.
 const differentElements = function (firstList,secondList) {
   firstList = uniqueElements(firstList);
   secondList = uniqueElements(secondList);
 
-  let isFound;
+  let isFound; // 1. You don't need this. Get rid of it. You were already given feedback for this...
   differentiatedElements = [];
   for(let element of firstList) {
     isFound = secondList.includes(element);
@@ -90,7 +94,7 @@ const differentElements = function (firstList,secondList) {
 exports.differentElements = differentElements;
 //--------------------------------------------
 
-const extractDigits = function ( number) {
+const extractDigits = function ( number) { // Indentation issue
   let convertedNumber = number.toString();
   return  convertedNumber.split("");
 }
@@ -103,7 +107,7 @@ const isEven  = function(element) {
 }
 
 const findEvenNumbers = function (numbers) {
-  let evenNum = [];
+  let evenNum = []; // Unnecessary variable
   evenNum =  numbers.filter(isEven);
   return evenNum;
 }
@@ -114,7 +118,7 @@ const checkGreaterNumber = function (firstNumber,secondNumber) {
   return Math.max(firstNumber,secondNumber);
 }
 
-const findGreatestNumber = function (numbersList) {
+const findGreatestNumber = function (numbersList) { // Does not work with empty list
   return numbersList.reduce(checkGreaterNumber);
 }
 exports.findGreatest = findGreatestNumber;
@@ -124,7 +128,7 @@ const checkSmallerNumber = function (firstNumber,secondNumber) {
   return Math.min(firstNumber,secondNumber);
 }
 
-const findLowestNumber = function (numbersList) {
+const findLowestNumber = function (numbersList) { // Does not work with empty list
   return numbersList.reduce(checkSmallerNumber);
 }
 exports.findLowest = findLowestNumber;
@@ -140,7 +144,7 @@ const findOddNumbers = function (numbers) {
 
 exports.findOddNumbers = findOddNumbers;
 //----------------------------------------------
-
+// Its good you used a standard function. However as part of this exervise try implementing reverse yourself, without using reverse function on array.
 const reversedList = function (dataSet) {
   return dataSet.reverse();
 }
@@ -152,7 +156,8 @@ const findSum = function (dataSet) {
 }
 exports.findSum = findSum;
 //----------------------------------------------
-
+// Its slightly complicated implementation. Here your index == -1 is being used as a flag
+// Another approach is to use first use a filter and then a head operation. implement and compare.
 const findPosition = function(state,element,index) {
   if(state.element == element && state.index == -1) {
     state.index = index;
@@ -170,8 +175,9 @@ const findFirstPosition = function (numbersList,number) {
 exports.findFirstPosition= findFirstPosition;
 //----------------------------------------------
 
-const intersectionOfArrays = function (firstList,secondList) {
-  firstList = uniqueElements(firstList);
+// use higher order functions to do this
+const intersectionOfArrays = function (firstList,secondList) { // its not intersectionOfArrays, but intersectionOfSets
+  firstList = uniqueElements(firstList); // thse are not Lists, but sets
   secondList = uniqueElements(secondList);
 
   let intersection = [];
@@ -186,10 +192,12 @@ const intersectionOfArrays = function (firstList,secondList) {
 exports.intersectionOfArrays = intersectionOfArrays;
 //----------------------------------------------
 
+// Good you used early returns instead of flags :) 
+// However implement this using a HOF (higher order function)
 const isAscending = function (numbersList) {
-  for (let counter = 0; counter < numbersList.length - 1; counter++) {
+  for (let counter = 0; counter < numbersList.length - 1; counter++) { 
     if( numbersList[counter] > numbersList[counter + 1]) {
-      return false;
+      return false; 
     }
   }
   return true;
@@ -209,7 +217,7 @@ const isDescending = function (numbersList) {
 
 exports.isDescending = isDescending;
 //----------------------------------------------
-
+// Good use of early returns. Use HOF to implement same
 const isSubset = function (firstList,secondList) {
   firstList = uniqueElements(firstList);
   secondList = uniqueElements(secondList);
@@ -338,6 +346,7 @@ const unionOfArrays = function (firstDataSet,secondDataSet) {
 exports.unionOfArrays = unionOfArrays;
 //----------------------------------------------
 
+// As of now this function does not seem very useful - it can easily be replaced with [first,second] -- am I missing something?
 const createZip = function(firstNumber,secondNumber) {
   let zip = [];
   zip[0] = firstNumber;
