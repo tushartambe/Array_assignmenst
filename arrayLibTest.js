@@ -158,13 +158,13 @@ assert.deepEqual(findFirstPosition([4,-2,5],0),-1);
 assert.deepEqual(findFirstPosition([2,0,2,1,],2),0);
 assert.deepEqual(findFirstPosition([23,405,12,10,75,9,7,2],10),3);
 //----------------------------------------------------------
-const intersectionOfArrays = require('./arrayLib.js').intersectionOfArrays;
+const intersectionOfSets = require('./arrayLib.js').intersectionOfSets;
 
-assert.deepEqual(intersectionOfArrays([1],[2]),[]); 
-assert.deepEqual(intersectionOfArrays([2,4],[3]),[]);
-assert.deepEqual(intersectionOfArrays([3,3,5],[3,6,1,5,2]),[3,5]);
-assert.deepEqual(intersectionOfArrays([2,3,4,2,3],[3,6]),[3]);
-assert.deepEqual(intersectionOfArrays([1,1,0,3,5,3,7],[7,7,88]),[7]);
+assert.deepEqual(intersectionOfSets([1],[2]),[]); 
+assert.deepEqual(intersectionOfSets([2,4],[3]),[]);
+assert.deepEqual(intersectionOfSets([3,3,5],[3,6,1,5,2]),[3,5]);
+assert.deepEqual(intersectionOfSets([2,3,4,2,3],[3,6]),[3]);
+assert.deepEqual(intersectionOfSets([1,1,0,3,5,3,7],[7,7,88]),[7]);
 //--------------------------------------------------------
 
 const isAscending = require('./arrayLib.js').isAscending;
@@ -188,11 +188,13 @@ assert.equal(isDescending([23,405,12,0,75,9,7,2]),false);
 
 const isSubset = require('./arrayLib.js').isSubset;
 
-assert.deepEqual(isSubset([1],[1]),false); 
+assert.deepEqual(isSubset([1],[1]),true); 
 assert.deepEqual(isSubset([2,4],[3]),false);
 assert.deepEqual(isSubset([3,5],[3]),true);
 assert.deepEqual(isSubset([2,3,4,2,3],[3,6]),false);
 assert.deepEqual(isSubset([1,1,0,3,5,3,7],[7,1,0]),true);
+
+
 //--------------------------------------------------------------
 
 const lengthOfEveryElement = require('./arrayLib.js').lengthOfEveryElement;
@@ -213,9 +215,9 @@ const partitionOfArray = require('./arrayLib.js').partitionOfArray;
 
 assert.deepEqual(partitionOfArray([1],1),[[1],[]]); 
 assert.deepEqual(partitionOfArray([2,4],4),[[2,4],[]]);
-assert.deepEqual(partitionOfArray([3,6,1,5,2],5),[[1,2,3,5],[6]]);
-assert.deepEqual(partitionOfArray([2,3,4,2,3],2),[[2,2],[3,3,4]]);
-assert.deepEqual(partitionOfArray([1,1,0,3,5,3,7],4),[[0,1,1,3,3],[5,7]]);
+assert.deepEqual(partitionOfArray([3,6,1,5,2],5),[[3,1,5,2],[6]]);
+assert.deepEqual(partitionOfArray([2,3,4,2,3],2),[[2,2],[3,4,3]]);
+assert.deepEqual(partitionOfArray([1,1,0,3,5,3,7],4),[[1,1,0,3,3],[5,7]]);
 //--------------------------------------------------------------------
 
 const fibSeries = require('./arrayLib.js').fibSeries;

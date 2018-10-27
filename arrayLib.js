@@ -1,4 +1,4 @@
-filterUniqueElements = function(uniqueList, element) {
+const filterUniqueElements = function(uniqueList, element) {
   if(!uniqueList.includes(element)) {
     uniqueList = uniqueList.concat(element);
   }
@@ -63,21 +63,21 @@ const totalOddNumbers = function (numbers) {
 exports.totalOddNumbers = totalOddNumbers;
 //-----------------------------------------
 
-const differentElements = function (firstList,secondList) {
-  firstList = uniqueElements(firstList);
-  secondList = uniqueElements(secondList);
-
-  let isFound;
-  differentiatedElements = [];
-  for(let element of firstList) {
-    isFound = secondList.includes(element);
-
-    if(!isFound) {
-      differentiatedElements.push(element);
-    }
+const filterDifferentElements = function(array){
+  return function(number){
+    if(array.includes(number))
+      return false;
+    return true;
   }
+}
 
-  return differentiatedElements;
+const differentElements = function (firstList,secondList) {
+
+  firstList = uniqueElements(firstList);
+  secondList  = uniqueElements(secondList);
+  let getDifferentElements = filterDifferentElements(secondList);
+  return firstList.filter(getDifferentElements);
+
 }
 exports.differentElements = differentElements;
 //--------------------------------------------
@@ -95,9 +95,7 @@ const isEven  = function(element) {
 }
 
 const findEvenNumbers = function (numbers) {
-  let evenNum = [];
-  evenNum =  numbers.filter(isEven);
-  return evenNum;
+  return  numbers.filter(isEven);
 }
 exports.findEvenNumbers = findEvenNumbers;
 //----------------------------------------------
@@ -107,6 +105,10 @@ const checkGreaterNumber = function (firstNumber,secondNumber) {
 }
 
 const findGreatestNumber = function (numbersList) {
+  if(!numbersList) {
+    return undefined;
+  }
+
   return numbersList.reduce(checkGreaterNumber);
 }
 exports.findGreatest = findGreatestNumber;
@@ -117,6 +119,9 @@ const checkSmallerNumber = function (firstNumber,secondNumber) {
 }
 
 const findLowestNumber = function (numbersList) {
+  if(!numbersList) {
+    return undefined;
+  }
   return numbersList.reduce(checkSmallerNumber);
 }
 exports.findLowest = findLowestNumber;
@@ -134,7 +139,11 @@ exports.findOddNumbers = findOddNumbers;
 //----------------------------------------------
 
 const reversedList = function (dataSet) {
-  return dataSet.reverse();
+  let reverseData = [];
+  for (element of dataSet) {
+    reverseData.unshift(element);
+  }
+  return reverseData;
 }
 exports.reversedList= reversedList;
 //----------------------------------------------
@@ -145,79 +154,63 @@ const findSum = function (dataSet) {
 exports.findSum = findSum;
 //----------------------------------------------
 
-const findPosition = function(state,element,index) {
-  if(state.element == element && state.index == -1) {
-    state.index = index;
-    return state;
-  }
-  return state;
-}
-
 const findFirstPosition = function (numbersList,number) {
-
-  let firstPosition = numbersList.reduce(findPosition,{ element : number, index : -1 }).index;
-
-  return firstPosition;
+  return numbersList.indexOf(number);
 }
 exports.findFirstPosition= findFirstPosition;
 //----------------------------------------------
-
-const intersectionOfArrays = function (firstList,secondList) {
-  firstList = uniqueElements(firstList);
-  secondList = uniqueElements(secondList);
-
-  let intersection = [];
-  for(let element of secondList) {
-    if(firstList.includes(element)) {
-      intersection.push(element);
-    }
+const instersectionSet = function(DataSet) {
+   return function(number){
+    if(DataSet.includes(number))
+      return true;
+    return false;
   }
-
-  return intersection;
 }
-exports.intersectionOfArrays = intersectionOfArrays;
+
+const intersectionOfSets = function (firstSet,secondSet) {
+  firstSet = uniqueElements(firstSet);
+  secondSet = uniqueElements(secondSet);
+
+  let intersection = instersectionSet(secondSet);
+  return firstSet.filter(intersection);
+}
+exports.intersectionOfSets = intersectionOfSets;
 //----------------------------------------------
 
+const checkAscending = function(object, number){
+  let { isAsndingResult,previousNumber} = object;
+  object.isAsndingResult = isAsndingResult && number >= object.previousNumber;
+  return {isAsndingResult : object.isAsndingResult, previousNumber : number};
+}
+
 const isAscending = function (numbersList) {
-  for (let counter = 0; counter < numbersList.length - 1; counter++) {
-    if( numbersList[counter] > numbersList[counter + 1]) {
-      return false;
-    }
-  }
-  return true;
+  return numbersList.reduce(checkAscending, {isAsndingResult : true, previousNumber : numbersList[0]}).isAsndingResult;
 }
 
 exports.isAscending = isAscending;
 //----------------------------------------------
 
 const isDescending = function (numbersList) {
-  for (let counter = 0; counter < numbersList.length - 1; counter++) {
-    if( numbersList[counter] < numbersList[counter + 1]) {
-      return false;
-    }
-  }
-  return true;
+  numbersList  =numbersList.reverse();
+  return numbersList.reduce(checkAscending, {isAsndingResult : true, previousNumber : numbersList[0]}).isAsndingResult;
 }
 
 exports.isDescending = isDescending;
 //----------------------------------------------
 
+const isIncludes = function(set) {
+  return function(element) {
+    return set.includes(element);
+  }
+}
+
 const isSubset = function (firstList,secondList) {
   firstList = uniqueElements(firstList);
   secondList = uniqueElements(secondList);
+  
+  let checkSubSet = isIncludes(firstList);
+  return secondList.every(checkSubSet);
 
-  if( firstList.length <= secondList.length) {
-    return false;
-  }
-
-  for( let counter = 0; counter < secondList.length; counter++) {
-
-    if(!firstList.includes(secondList[counter])) {
-      return false;
-    }
-  }
-
-  return true;
 }
 exports.isSubset = isSubset;
 //----------------------------------------------
@@ -229,38 +222,22 @@ const lengthOfEveryElement = function (words) {
 exports.lengthOfEveryElement = lengthOfEveryElement;
 //----------------------------------------------
 
-const sortNumbers = function(numbersList) {
-  let swappingVariable;
-  for(let firstIndex = 0; firstIndex < numbersList.length; firstIndex++) {
-    for( let secondIndex =0; secondIndex < numbersList.length-1; secondIndex++) {
-      if( numbersList[secondIndex] > numbersList[secondIndex + 1]) {
-        swappingVariable = numbersList[secondIndex];
-        numbersList[secondIndex] = numbersList[secondIndex + 1];
-        numbersList[secondIndex + 1] = swappingVariable;
-      }
+const partitioningNumbers = function (partitionValue){
+  return function(partitionNumber, number){
+    let {smallerNumbers,biggerNumbers} = partitionNumber;
+    if(number <= partitionValue){
+      smallerNumbers.push(number);
+      return {smallerNumbers, biggerNumbers};
     }
+    biggerNumbers.push(number);
+    return {smallerNumbers, biggerNumbers};
   }
-  return numbersList;
-}
-
-const seperateNumbers = function (state,element){
-  let {smallerNumbers,biggerNumbers,number} = state;
-  if( element <= state.number) {
-    smallerNumbers = smallerNumbers.concat(element);
-    return {smallerNumbers :smallerNumbers,biggerNumbers:biggerNumbers,number:number};
-  }
-
-  biggerNumbers = biggerNumbers.concat(element);
-  return {smallerNumbers :smallerNumbers,biggerNumbers:biggerNumbers,number:number};
 }
 
 const partitionOfArray = function (numbersList,number) {
-  let sortedList = sortNumbers(numbersList);
-  let partitions = [];
-  partitions[0] = sortedList.reduce(seperateNumbers,{smallerNumbers:[],biggerNumbers: [],number:number}).smallerNumbers;
-  partitions[1] = sortedList.reduce(seperateNumbers,{smallerNumbers:[],biggerNumbers: [],number:number}).biggerNumbers;
-
-  return partitions;
+  let partitionByValue = partitioningNumbers(number);
+  let partitions =  numbersList.reduce(partitionByValue,{smallerNumbers:[],biggerNumbers: []});
+  return [partitions.smallerNumbers, partitions.biggerNumbers];
 }
 exports.partitionOfArray = partitionOfArray;
 //----------------------------------------------
@@ -307,25 +284,18 @@ const selectAlternateNumbers = function(numbersList) {
 }
 exports.selectAlternateNumbers= selectAlternateNumbers;
 //----------------------------------------------
+const union = function(dataSet,number) {
+  if(!dataSet.includes(number)) {
+    dataSet.push(number);
+  }
+  return dataSet;
+}
 
 const unionOfArrays = function (firstDataSet,secondDataSet) {
   firstDataSet = uniqueElements(firstDataSet);
   secondDataSet = uniqueElements(secondDataSet);
-  let unionOfNumbers = [];
 
-  for(let counter = 0; counter < firstDataSet.length; counter++) {
-    if(!unionOfNumbers.includes(firstDataSet[counter])) {
-      unionOfNumbers.push(firstDataSet[counter]);
-    }
-  }
-
-  for(let counter = 0; counter < secondDataSet.length; counter++) {
-    if(!unionOfNumbers.includes(secondDataSet[counter])) {
-      unionOfNumbers.push(secondDataSet[counter]);
-    }
-  }
-
-  return unionOfNumbers;
+  return secondDataSet.reduce(union,firstDataSet);
 }
 exports.unionOfArrays = unionOfArrays;
 //----------------------------------------------
